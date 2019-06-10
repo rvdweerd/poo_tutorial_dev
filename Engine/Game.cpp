@@ -32,12 +32,14 @@ Game::Game( MainWindow& wnd )
 	goal( xDist( rng ),yDist( rng ) ),
 	meter( 20,20 )
 {
-	std::uniform_real_distribution<float> vDist( -2.5f,2.5f );
+	std::uniform_real_distribution<float> vDist( -2.5f * 60.0f  , 2.5f*60.0f );
 	for( int i = 0; i < nPoo; ++i )
 	{
 		poos[i].Init( xDist( rng ),yDist( rng ),vDist( rng ),vDist( rng ) );
 	}
 	title.Play();
+
+	//lastTimeMarker = std::chrono::steady_clock::now();
 }
 
 void Game::Go()
@@ -50,15 +52,22 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	/*using std::chrono::steady_clock;
+	steady_clock::time_point oldTimeMarker = lastTimeMarker;
+	lastTimeMarker = std::chrono::steady_clock::now();
+	std::chrono::duration<float> dur = lastTimeMarker - oldTimeMarker;
+	float dt = dur.count();*/
+	const float dt = timer.Mark();
+	
 	goal.UpdateColor();
 	if( isStarted && !isGameOver )
 	{
-		dude.Update( wnd.kbd );
+		dude.Update( wnd.kbd , dt );
 		dude.ClampToScreen();
 
 		for( int i = 0; i < nPoo; ++i )
 		{
-			poos[i].Update();
+			poos[i].Update(dt);
 			if( poos[i].TestCollision( dude ) )
 			{
 				isGameOver = true;
