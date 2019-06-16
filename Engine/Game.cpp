@@ -21,6 +21,7 @@
 #include "MainWindow.h"
 #include "Game.h"
 #include <random>
+#include "Vec2.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -32,6 +33,13 @@ Game::Game( MainWindow& wnd )
 	goal( xDist( rng ),yDist( rng ) ),
 	meter( 20,20 )
 {
+	Vec2 v0(20.0f, 13.0f);
+	float half = 0.5f;
+	Vec2 v1 = v0 * half;
+	v1 = half * v1;
+	v1 *= half;
+
+
 	std::uniform_real_distribution<float> vDist( -2.5f * 60.0f,2.5f * 60.0f );
 	for( int i = 0; i < nPoo; ++i )
 	{
@@ -73,6 +81,17 @@ void Game::UpdateModel()
 			goal.Respawn( xDist( rng ),yDist( rng ) );
 			meter.IncreaseLevel();
 			pickup.Play( rng );
+		}
+	}
+	else if (isGameOver)
+	{
+		if (wnd.kbd.KeyIsPressed(VK_RETURN))
+		{
+			do
+			{
+				dude.Respawn( xDist(rng), yDist(rng) );
+			} while (goal.TestCollision(dude));
+			isGameOver = false;
 		}
 	}
 	else

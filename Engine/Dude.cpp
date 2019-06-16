@@ -24,6 +24,12 @@ void Dude::ClampToScreen()
 	}
 }
 
+void Dude::Respawn(float in_x, float in_y)
+{
+	x = in_x;
+	y = in_y;
+}
+
 void Dude::Draw( Graphics& gfx ) const
 {
 	const int x_int = int( x );
