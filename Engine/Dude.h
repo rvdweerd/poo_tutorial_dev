@@ -8,11 +8,11 @@ class Dude
 {
 public:
 	void ClampToScreen();
-	void Respawn(float in_x, float in_y);
+	void Respawn( const Vec2 pos_in);
 	void Draw( Graphics& gfx ) const;
 	void Update( const Keyboard& kbd,float dt );
-	float GetX() const;
-	float GetY() const;
+	Vec2 GetPosition() const;
+	//float GetY() const;
 	float GetWidth() const;
 	float GetHeight() const;
 private:

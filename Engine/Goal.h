@@ -7,9 +7,9 @@
 class Goal
 {
 public:
-	Goal( float in_x,float in_y )
+	Goal( const Vec2& pos_in )
 		:
-		position( in_x, in_y )
+		position( pos_in )
 	{}
 	void Draw( Graphics& gfx ) const
 	{
@@ -17,21 +17,20 @@ public:
 	}
 	bool TestCollision( const Dude& dude ) const
 	{
-		const float duderight = dude.GetX() + dude.GetWidth();
-		const float dudebottom = dude.GetY() + dude.GetHeight();
+		const float duderight = dude.GetPosition().x + dude.GetWidth();
+		const float dudebottom = dude.GetPosition().y + dude.GetHeight();
 		const float pooright = position.x + dimension;
 		const float poobottom = position.y + dimension;
 
 		return
 			duderight >= position.x &&
-			dude.GetX() <= pooright &&
+			dude.GetPosition().x <= pooright &&
 			dudebottom >= position.y &&
-			dude.GetY() <= poobottom;
+			dude.GetPosition().y <= poobottom;
 	}
-	void Respawn( float in_x,float in_y )
+	void Respawn( const Vec2& pos_in )
 	{
-		position.x = in_x;
-		position.y = in_y;
+		position = pos_in;
 	}
 	void UpdateColor()
 	{

@@ -30,7 +30,7 @@ Game::Game( MainWindow& wnd )
 	rng( rd() ),
 	xDist( 0,770 ),
 	yDist( 0,570 ),
-	goal( xDist( rng ),yDist( rng ) ),
+	goal( Vec2(xDist( rng ),yDist( rng )) ),
 	meter( 20,20 )
 {
 	/*Vec2 v0(20.0f, 13.0f);
@@ -43,7 +43,7 @@ Game::Game( MainWindow& wnd )
 	std::uniform_real_distribution<float> vDist( -2.5f * 60.0f,2.5f * 60.0f );
 	for( int i = 0; i < nPoo; ++i )
 	{
-		poos[i].Init( xDist( rng ),yDist( rng ),vDist( rng ),vDist( rng ) );
+		poos[i].Init( Vec2(xDist( rng ),yDist( rng )) ,Vec2(vDist( rng ),vDist( rng ) ));
 	}
 	title.Play();
 }
@@ -78,7 +78,7 @@ void Game::UpdateModel()
 
 		if( goal.TestCollision( dude ) )
 		{
-			goal.Respawn( xDist( rng ),yDist( rng ) );
+			goal.Respawn( Vec2(xDist( rng ),yDist( rng )) );
 			meter.IncreaseLevel();
 			pickup.Play( rng );
 		}
@@ -89,7 +89,7 @@ void Game::UpdateModel()
 		{
 			do
 			{
-				dude.Respawn( xDist(rng), yDist(rng) );
+				dude.Respawn( Vec2(xDist(rng), yDist(rng)) );
 				pickup.Play(rng);
 			} while (goal.TestCollision(dude));
 			isGameOver = false;

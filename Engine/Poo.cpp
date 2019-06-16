@@ -2,13 +2,11 @@
 #include "Graphics.h"
 #include <assert.h>
 
-void Poo::Init( float in_x,float in_y,float in_vx,float in_vy )
+void Poo::Init( const Vec2& pos_in, const Vec2& vel_in )
 {
 	assert( initialized == false );
-	position.x = in_x;
-	position.y = in_y;
-	velocity.x = in_vx;
-	velocity.y = in_vy;
+	position = pos_in;
+	velocity = vel_in;
 	initialized = true;
 }
 
@@ -47,16 +45,16 @@ void Poo::Update( float dt )
 bool Poo::TestCollision( const Dude& dude ) const
 {
 	assert( initialized == true );
-	const float duderight = dude.GetX() + dude.GetWidth();
-	const float dudebottom = dude.GetY() + dude.GetHeight();
+	const float duderight = dude.GetPosition().x + dude.GetWidth();
+	const float dudebottom = dude.GetPosition().y + dude.GetHeight();
 	const float pooright = position.x + width;
 	const float poobottom = position.y + height;
 
 	return
 		duderight >= position.x &&
-		dude.GetX() <= pooright &&
+		dude.GetPosition().x <= pooright &&
 		dudebottom >= position.y &&
-		dude.GetY() <= poobottom;
+		dude.GetPosition().y <= poobottom;
 }
 
 void Poo::Draw( Graphics& gfx ) const

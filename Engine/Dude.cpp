@@ -25,10 +25,9 @@ void Dude::ClampToScreen()
 	}
 }
 
-void Dude::Respawn(float in_x, float in_y)
+void Dude::Respawn( const Vec2 pos_in)
 {
-	position.x = in_x;
-	position.y = in_y;
+	position = pos_in;
 }
 
 void Dude::Draw( Graphics& gfx ) const
@@ -374,15 +373,15 @@ void Dude::Update( const Keyboard & kbd,float dt )
 	}
 }
 
-float Dude::GetX() const
+Vec2 Dude::GetPosition() const
 {
-	return position.x;
+	return position;
 }
 
-float Dude::GetY() const
+/*float Dude::GetY() const
 {
 	return position.y;
-}
+}*/
 
 float Dude::GetWidth() const
 {
