@@ -33,8 +33,16 @@ Game::Game( MainWindow& wnd )
 	goal( Vec2(xDist( rng ),yDist( rng )) ),
 	meter( 20,20 )
 {
-	/*Vec2 v0(20.0f, 13.0f);
-	float half = 0.5f;
+	Vec2 v0(12.0f, 5.0f);
+	Vec2 v1(7.0f, 13.0f);
+	float dist = (v1 - v0).Length();
+	float dist2 = (v0 - v1).Length();
+	float lengthSqOfVec = v0.LengthSq();
+	float lengthOfVec = v0.Length();
+	v1.Normalize();
+	float l = v1.Length();
+	
+	/*float half = 0.5f;
 	Vec2 v1 = v0 * half;
 	v1 = half * v1;
 	v1 *= half;*/
@@ -43,7 +51,8 @@ Game::Game( MainWindow& wnd )
 	std::uniform_real_distribution<float> vDist( -2.5f * 60.0f,2.5f * 60.0f );
 	for( int i = 0; i < nPoo; ++i )
 	{
-		poos[i].Init( Vec2(xDist( rng ),yDist( rng )) ,Vec2(vDist( rng ),vDist( rng ) ));
+		//poos[i].Init( Vec2(xDist( rng ),yDist( rng )) ,Vec2(vDist( rng ),vDist( rng ) ));
+		poos[i].Init(Vec2(xDist(rng), yDist(rng)), Vec2(0, -3.0f * 60.0f));
 	}
 	title.Play();
 }

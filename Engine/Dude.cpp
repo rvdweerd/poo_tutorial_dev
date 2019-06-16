@@ -355,22 +355,31 @@ void Dude::Draw( Graphics& gfx ) const
 
 void Dude::Update( const Keyboard & kbd,float dt )
 {
+	Vec2 delta(0, 0);
+
 	if( kbd.KeyIsPressed( VK_RIGHT ) )
 	{
-		position.x += speed * dt;
+		//position.x += speed * dt;
+		delta.x = 1;
 	}
 	if( kbd.KeyIsPressed( VK_LEFT ) )
 	{
-		position.x -= speed * dt;
+		delta.x = -1;
+		//position.x -= speed * dt;
 	}
 	if( kbd.KeyIsPressed( VK_DOWN ) )
 	{
-		position.y += speed * dt;
+		delta.y = 1;//position.y += speed * dt;
 	}
 	if( kbd.KeyIsPressed( VK_UP ) )
 	{
-		position.y -= speed * dt;
+		delta.y = -1;//position.y -= speed * dt;
 	}
+
+	//position += delta.GetNormalized() * speed * dt;
+	delta.Normalize();
+	position += delta * speed * dt;
+
 }
 
 Vec2 Dude::GetPosition() const
