@@ -21,7 +21,7 @@ public:
 	bool operator>=(Vec2 rhs);
 	bool operator<=(Vec2 rhs);
 	
-private:
+public:
 	float x;
 	float y;
 

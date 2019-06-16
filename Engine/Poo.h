@@ -2,6 +2,7 @@
 
 #include "Graphics.h"
 #include "Dude.h"
+#include "Vec2.h"
 
 class Poo
 {
@@ -11,10 +12,8 @@ public:
 	bool TestCollision( const Dude& dude ) const;
 	void Draw( Graphics& gfx ) const;
 private:
-	float x;
-	float y;
-	float vx;
-	float vy;
+	Vec2 position;
+	Vec2 velocity;
 	static constexpr float width = 24;
 	static constexpr float height = 24;
 	bool initialized = false;

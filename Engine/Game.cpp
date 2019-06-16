@@ -33,11 +33,11 @@ Game::Game( MainWindow& wnd )
 	goal( xDist( rng ),yDist( rng ) ),
 	meter( 20,20 )
 {
-	Vec2 v0(20.0f, 13.0f);
+	/*Vec2 v0(20.0f, 13.0f);
 	float half = 0.5f;
 	Vec2 v1 = v0 * half;
 	v1 = half * v1;
-	v1 *= half;
+	v1 *= half;*/
 
 
 	std::uniform_real_distribution<float> vDist( -2.5f * 60.0f,2.5f * 60.0f );
@@ -90,6 +90,7 @@ void Game::UpdateModel()
 			do
 			{
 				dude.Respawn( xDist(rng), yDist(rng) );
+				pickup.Play(rng);
 			} while (goal.TestCollision(dude));
 			isGameOver = false;
 		}
