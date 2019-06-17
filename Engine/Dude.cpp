@@ -367,7 +367,7 @@ void Dude::Update( const Keyboard & kbd, Mouse& mouse, float dt )
 		delta = mousePosition - dudeCenter;
 	
 		//position += delta.GetNormalized() * speed * dt;
-		if (delta.LengthSq() <= 1.50f)
+		if (delta.LengthSq() <= 2.0f)
 		{
 			position = mousePosition - Vec2(float(width) / 2, float(height) / 2);
 		}
