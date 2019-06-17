@@ -59,7 +59,7 @@ private:
 	Dude dude;
 	Goal goal;
 	Meter meter;
-	static constexpr int nPoo = 1;
+	static constexpr int nPoo = 10;
 	Poo poos[nPoo];
 	bool isStarted = false;
 	bool isGameOver = false;

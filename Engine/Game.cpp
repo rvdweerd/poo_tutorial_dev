@@ -51,8 +51,8 @@ Game::Game( MainWindow& wnd )
 	std::uniform_real_distribution<float> vDist( -2.5f * 60.0f,2.5f * 60.0f );
 	for( int i = 0; i < nPoo; ++i )
 	{
-		//poos[i].Init( Vec2(xDist( rng ),yDist( rng )) ,Vec2(vDist( rng ),vDist( rng ) ));
-		poos[i].Init(Vec2(xDist(rng), yDist(rng)), Vec2(0, -3.0f * 60.0f));
+		poos[i].Init( Vec2(xDist( rng ),yDist( rng )) ,Vec2(vDist( rng ),vDist( rng ) ));
+		//poos[i].Init(Vec2(xDist(rng), yDist(rng)), Vec2(0, -3.0f * 60.0f));
 	}
 	title.Play();
 }
@@ -72,7 +72,7 @@ void Game::UpdateModel()
 	goal.UpdateColor();
 	if( isStarted && !isGameOver )
 	{
-		dude.Update( wnd.kbd,dt );
+		dude.Update( wnd.kbd, wnd.mouse, dt );
 		dude.ClampToScreen();
 
 		for( int i = 0; i < nPoo; ++i )

@@ -353,16 +353,31 @@ void Dude::Draw( Graphics& gfx ) const
 	gfx.PutPixel( 12 + x_int,19 + y_int,0,0,0 );
 }
 
-void Dude::Update( const Keyboard & kbd,float dt )
+void Dude::Update( const Keyboard & kbd, Mouse& mouse, float dt )
 {
 	Vec2 delta(0, 0);
+	Vec2 mousePosition(0,0), dudeCenter(0,0);
 
-	if( kbd.KeyIsPressed( VK_RIGHT ) )
+	if (mouse.LeftIsPressed())
+	//if( kbd.KeyIsPressed( VK_RIGHT ) )
 	{
 		//position.x += speed * dt;
-		delta.x = 1;
+		mousePosition = Vec2(float(mouse.GetPosX()), float(mouse.GetPosY()));
+		dudeCenter = (position + Vec2(float(width) / 2, float(height) / 2));
+		delta = mousePosition - dudeCenter;
+	
+		//position += delta.GetNormalized() * speed * dt;
+		if (delta.LengthSq() <= 1.50f)
+		{
+			position = mousePosition - Vec2(float(width) / 2, float(height) / 2);
+		}
+		else
+		{
+			delta.Normalize();
+			position += delta * speed * dt;
+		}
 	}
-	if( kbd.KeyIsPressed( VK_LEFT ) )
+	/*if( kbd.KeyIsPressed( VK_LEFT ) )
 	{
 		delta.x = -1;
 		//position.x -= speed * dt;
@@ -374,12 +389,9 @@ void Dude::Update( const Keyboard & kbd,float dt )
 	if( kbd.KeyIsPressed( VK_UP ) )
 	{
 		delta.y = -1;//position.y -= speed * dt;
-	}
+	}*/
 
-	//position += delta.GetNormalized() * speed * dt;
-	delta.Normalize();
-	position += delta * speed * dt;
-
+	
 }
 
 Vec2 Dude::GetPosition() const
