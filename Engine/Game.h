@@ -67,5 +67,7 @@ private:
 	Sound title = Sound( L"Sounds\\title.wav" );
 	SoundEffect fart = SoundEffect( 
 		{ L"Sounds\\fart1.wav",L"Sounds\\fart2.wav" } );
+	Surface openingScreen;
+	Surface gameOverScreen;
 	/********************************/
 };

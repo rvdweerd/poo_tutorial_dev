@@ -2,6 +2,12 @@
 #include "Graphics.h"
 #include <assert.h>
 
+Poo::Poo()
+	:
+	surface("Images\\poo.bmp")
+{
+}
+
 void Poo::Init( const Vec2& pos_in, const Vec2& vel_in )
 {
 	assert( initialized == false );
@@ -63,7 +69,8 @@ void Poo::Draw( Graphics& gfx ) const
 
 	const int x_int = int( position.x );
 	const int y_int = int( position.y );
-
+	gfx.DrawSprite(x_int, y_int, surface, Colors::White);
+	/*
 	gfx.PutPixel( 14 + x_int,0 + y_int,138,77,0 );
 	gfx.PutPixel( 7 + x_int,1 + y_int,138,77,0 );
 	gfx.PutPixel( 13 + x_int,1 + y_int,138,77,0 );
@@ -295,4 +302,5 @@ void Poo::Draw( Graphics& gfx ) const
 	gfx.PutPixel( 4 + x_int,23 + y_int,51,28,0 );
 	gfx.PutPixel( 5 + x_int,23 + y_int,51,28,0 );
 	gfx.PutPixel( 6 + x_int,23 + y_int,51,28,0 );
+	*/
 }
